@@ -1,0 +1,44 @@
+version: '3.2'
+services:
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+    - 443:443
+    - 80:80
+    volumes:
+    - ./nginx/conf/conf.d:/etc/nginx/conf.d/
+    - ./nginx/certs:/etc/nginx/certs
+    depends_on:
+    - grafana
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    user: "1000"
+    env_file:
+    - ./env_vars
+    volumes:
+    - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+    depends_on:
+    - prometheus
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    command:
+    - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+    - cadvisor
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+    - /:/rootfs:ro
+    - /var/run/docker.sock:/var/run/docker.sock:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
