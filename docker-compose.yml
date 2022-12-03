@@ -20,6 +20,7 @@ services:
     env_file:
     - ./env_vars
     volumes:
+    #for change server to /grafana sub-path
     - ./grafana/grafana.ini:/etc/grafana/grafana.ini
     depends_on:
     - prometheus
