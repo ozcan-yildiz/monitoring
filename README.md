@@ -1,3 +1,3 @@
 # monitoring
 
-containerized monitoring solution
+containerized monitoring solution with grafana, prometheus and cadvisor.
