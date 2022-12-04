@@ -41,7 +41,7 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
     container_name: cadvisor
-     #Tried to change path directly via cadvisor but could get success so I redirected via nginx
+     #Tried to change path directly via cadvisor but couldn`t get success so I redirected via nginx
      #command: 
      #- --url_base_prefix=/cadvisor
     volumes:
