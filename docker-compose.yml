@@ -26,7 +26,7 @@ services:
     - prometheus
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus
     container_name: prometheus
     command:
     - --config.file=/etc/prometheus/prometheus.yml
@@ -36,7 +36,7 @@ services:
     - cadvisor
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor
     container_name: cadvisor
     volumes:
     - /:/rootfs:ro
